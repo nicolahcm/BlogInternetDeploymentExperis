@@ -1,0 +1,10 @@
+'use strict';
+module.exports = function (app) {
+    var posts = require('../controllers/postsController');
+
+    // posts Routes
+    app.route('/posts')
+        .get(posts.list_all_posts)
+        .post(posts.create_a_post);
+
+};

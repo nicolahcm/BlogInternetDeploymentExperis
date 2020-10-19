@@ -2,9 +2,9 @@ var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
-    //    PostModel = require('./api/models/postsModel'), //created model loading here
-    //    UserModel = require('./api/models/usersModel'),
-    //    CommentModel = require('./api/models/commentsModel'),
+    PostsModel = require('./api/models/postsModel'), //created model loading here
+    UsersModel = require('./api/models/usersModel'), // * These ARE NECESSARY. It threw me an error of model schema.
+    CommentsModel = require('./api/models/commentsModel'),
     bodyParser = require('body-parser');
 
 
@@ -26,8 +26,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-var routes = require('./api/routes/blogRoutes'); //importing route
-routes(app); //register the route
+var routesPosts = require('./api/routes/postsRoutes'); //importing route (only for posts)
+routesPosts(app); //register the route
+
+var routesComments = require('./api/routes/commentsRoutes'); // Importing route (only for comments)
+routesComments(app);
+
+var routesUsers = require('./api/routes/usersRoutes');
+routesUsers(app);
 
 
 app.listen(port);

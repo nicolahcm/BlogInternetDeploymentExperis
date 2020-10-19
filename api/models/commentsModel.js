@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 
 var CommentSchema = new Schema({
-    commentuser: {
+    commentUser: {
         type: String,
         required: 'Kindly enter the name of the post'
     },
@@ -16,15 +16,16 @@ var CommentSchema = new Schema({
         default: Date.now
     },
     belongingPostID: {
-        type: ObjectId
+        type: String
+    },
+    objectIDReferencePost: {
+        type: [{ type: Schema.Types.ObjectId, ref: 'Posts' }]
     },
     invisible: {
-        type: Boolean
+        type: Boolean,
         default: false
     }
 });
-
-
 
 
 

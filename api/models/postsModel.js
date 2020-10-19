@@ -28,11 +28,6 @@ var PostSchema = new Schema({
     image: {
         type: String
     },
-    tags: {
-        type: [{
-            type: String
-        }]
-    },
     archived: {
         type: Boolean
     }
