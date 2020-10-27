@@ -6,9 +6,14 @@ var mongoose = require('mongoose'),
     Posts = mongoose.model('Posts');
 
 
-
+// Lista ordinati per data. Alla fine della lista i più recenti.
 exports.list_all_comments = function (req, res) {
-    Comments.find({}, function (err, comment) {
+    // to grand access and avoid CORS problems
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', 'GET,POST');
+
+
+    Comments.find({}).sort({ date: 'desc' }).exec(function (err, comment) {
         if (err)
             res.send(err);
         res.json(comment);
@@ -41,4 +46,16 @@ exports.delete_a_comment = function (req, res) {
         res.json({ message: 'Comment successfully deleted' });
     });
 };
+
+exports.patch_a_comment = function (req, res) {
+
+    //console.log("req is:", req); // è una cosa lunghissima.
+    console.log("req.body is:", req.body) // è ciò che invio nel body della richiesta patch
+    Comments.findOneAndUpdate({ _id: req.params.commentId }, { $set: req.body }, { new: true },
+        function (err, post) {
+            if (err)
+                res.send(err);
+            res.json(post);
+        });
+}
 

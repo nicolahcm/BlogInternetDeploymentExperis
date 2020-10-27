@@ -7,4 +7,9 @@ module.exports = function (app) {
         .get(posts.list_all_posts)
         .post(posts.create_a_post);
 
+
+    app.route('/posts/:postId')
+        .delete(posts.delete_a_post)
+        .patch(posts.patch_a_post)
+
 };

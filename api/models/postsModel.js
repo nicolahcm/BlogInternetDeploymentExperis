@@ -30,11 +30,11 @@ var PostSchema = new Schema({
     },
     archived: {
         type: Boolean
+    },
+    public: {
+        type: Boolean
     }
 });
-
-
-
 
 
 module.exports = mongoose.model('Posts', PostSchema);

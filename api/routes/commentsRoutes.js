@@ -10,4 +10,5 @@ module.exports = function (app) {
 
     app.route('/comments/:commentId')
         .delete(comments.delete_a_comment)
+        .patch(comments.patch_a_comment)
 };
